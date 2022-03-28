@@ -1,0 +1,9 @@
+{
+    "generationLinks": {
+        "main": "https://www.dnd5eapi.co/api/",
+        "spells": "https://www.dnd5eapi.co/api/spells/",
+        "races": "https://www.dnd5eapi.co/api/races/",
+        "classes": "https://www.dnd5eapi.co/api/classes/",
+        "traits": "https://www.dnd5eapi.co/api/traits/"
+    }
+}

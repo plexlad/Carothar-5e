@@ -1,0 +1,15 @@
+{
+  "name": "carothar5e",
+  "version": "0.0.1",
+  "description": "A character manager and tool for DnD 5e.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "deplexus",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "fs": "^0.0.1-security"
+  }
+}
