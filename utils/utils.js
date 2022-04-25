@@ -1,21 +1,18 @@
 // Commonly used functions across sections
 
-const axios = require('axios');
-const fs = require('fs');
+const axios = require('axios');  // Used for get/post requests. Check requestGet
+const fs = require('fs');  // Used for writing to files
 
-const config = require('../config.json');
+const config = require('../config.json');  // Config for basic setup
 
 module.exports = {
-    example: function () {
-        console.log('Hello, World!');
-    },
-
     // Gives the current app version. Used for updating things such as characters.
     appVersion: 0.1,
 
+    // Returns the response for a get response
     /**
      * @param {String} url - URL of the API
-     * @returns {Object}
+     * @returns {Object} Returns the data from an api
      */
     requestGet: async function (url) {
         let res = await axios
@@ -23,9 +20,10 @@ module.exports = {
             .catch(e => {
                 console.error(e);
             });
-        return res.data;
+        return res;
     },
 
+    // Generates a spell certain libray from a RESTful API. If you want to make one, look at the lib files
     /**
      * @param {String} url - The http url of the API
      * @param {String} file_loc - The file_location you want to write to
@@ -33,6 +31,9 @@ module.exports = {
      */
     generateLibFromAPI: async function (url, file_loc, read_to_console=false) {
         let sample = await this.requestGet(url);
+        if (sample === undefined) {
+            console.log('Link is undefined!');
+        }
         let object = {};
 
         // Generate index (Library of indexes in chosen url_end)
@@ -46,7 +47,6 @@ module.exports = {
             if (read_to_console) console.log(i + ' / ' + sample.count);
         }
 
-        object.index = index;
         let data = JSON.stringify(object, null, 4);
         fs.writeFile(file_loc, data, e => {
             if (e) {
@@ -57,17 +57,61 @@ module.exports = {
         });
     },
 
-    // Combines two libraries together, including their indexes! Useful for custom /libs files
+    // Sends a status. Can be used for errors, debugging, and for specific cases. Sets an active status variable to this.
+    // The status still needs to be detected by the app for use.
+    // Status codes:
+    // 1 - Relating to system functions that need ot be fixed through programming
+    // 11 - System error
+    // 2 - Relating to character creation and updating
+    // 21 - Having to do with race loading
+    // 211 - Race is not in lib, and can only load the index name.
+    // 22 - Having to do with class loading
+    // 221 - Class is not in lib, and can only load the index name.
     /**
-     * @param {Object} lib1 
-     * @param {Object} lib2 
-     * @returns {Object}
+     * @param {Number} num - Status number
+     * @param {String} reason - The reason why the status was sent.
+     * @param {Function} cb - A callback function that can be used for detection, errors, etc.
      */
-    combineLibs: function (lib1, lib2) {
-        let temp_index = lib2.index;
-        delete lib2.index;
-        lib1 = { ...lib1, ...lib2 }
-        lib1.index.push(...temp_index);
-        return lib1;
+    sendStatus: function (num, cb=undefined, reason='') {
+        global._status = num;
+        global._reason = reason;
+        if (cb !== undefined) {
+            cb();
+        }
+    },
+
+    // Returns a string with the description of the status described above
+    // Behold, spaghetti
+    /**
+     * @param {*} num The status code that the description will be given of.
+     * @returns {String} Returns the description of the error code as a string
+     */
+    returnStatusInfo: function (num) {
+        let num_index =  String(num).split('');
+        if (num_index[0] === '1') {
+            if (num_index[1] === undefined) {
+                return 'Relates to system functions that need to be fixed through the programming.';
+            } else if (num_index[1] === '1') {
+                return 'System error';
+            }
+        } else if (num_index[0] === '2') {
+            if (num_index[1] === undefined) {
+                return 'Relates to character creation and updating';
+            } else if (num_index[1] === '1') {
+                if (num_index[2] === undefined) {
+                    return 'Having to do with race loading';
+                } else if (num_index[2] === '1') {
+                    return 'Race is not in lib, and can only load the index name';
+                }
+            } else if (num_index[1] === '2') {
+                if (num_index[2] === undefined) {
+                    return 'Having to do with class loading';
+                } else if (num_index[2] === '1') {
+                    return 'Class is not in lib, and can only load the index name';
+                }
+            }
+        } else {
+            throw `Status code ${num} does not exist!`;
+        }
     }
 }

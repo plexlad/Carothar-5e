@@ -1,9 +1,15 @@
 {
     "generationLinks": {
-        "main": "https://www.dnd5eapi.co/api/",
-        "spells": "https://www.dnd5eapi.co/api/spells/",
-        "races": "https://www.dnd5eapi.co/api/races/",
-        "classes": "https://www.dnd5eapi.co/api/classes/",
-        "traits": "https://www.dnd5eapi.co/api/traits/"
+        "main": ["https://www.dnd5eapi.co/api/"],
+        "spells": ["https://www.dnd5eapi.co/api/spells/"],
+        "races": ["https://www.dnd5eapi.co/api/races/"],
+        "classes": ["https://www.dnd5eapi.co/api/classes/"],
+        "traits": ["https://www.dnd5eapi.co/api/traits/"]
+    }, 
+    "filesToLoad": {
+        "classes": ["/libs/classes.json", "/libs/custom_classes.json"],
+        "races": ["/libs/races.json", "/libs/custom_races.json"],
+        "spells": ["/libs/spells.json", "/libs/custom_spells.json"],
+        "traits": ["/libs/traits.json", "/libs/custom_traits.json"]
     }
 }

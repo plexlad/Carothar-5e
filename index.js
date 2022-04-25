@@ -7,6 +7,8 @@ const charManager = require('./utils/charManager');
 const config = require('./config.json');
 
 // Put your code in main, this is where the stuff happens!
-function main() { }
+function main() {
+    
+}
 
 main();
