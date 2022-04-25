@@ -1,9 +1,10 @@
 const utils = require('./utils');
 
-const classes = require('../libs/classes.json');
-const races = require('../libs/races.json');
-const spells = require('../libs/spells.json');
-const traits = require('../libs/traits.json');
+// Use the custom libs by combining them with the main ones
+const classes = utils.combineLibs(require('../libs/classes.json'), require('../libs/custom_classes.json'));
+const races = utils.combineLibs(require('../libs/races.json'), require('../libs/custom_races.json'));
+const spells = utils.combineLibs(require('../libs/spells.json'), require('../libs/custom_spells.json'));
+const traits = utils.combineLibs(require('../libs/traits.json'), require('../libs/custom_traits.json'));
 
 module.exports = {
     // Returns a newly created character
@@ -50,12 +51,11 @@ module.exports = {
         app_version: utils.appVersion,
         // The race of the character. This adds even more features if you use a race from libs/races.json
         race: {
-            // Name of the race
-            name: '',
-            // Traits of the race
-            traits: {},
+            // Traits of the race. Holds race data from lib file.
+            // Attributes that can be used from base lib files include: index, name, speed, ability_bonuses, 
+            // alignment, age, size, size_description, starting_proficiencies, languages, language_dec, traits
+            // subraces, url. Look at the libs/races.json or libs/custom_races.json for examples.
             // Speed of the character
-            speed: 0
         },
         // Total level used for proficiency bonus and similar
         total_level: 0,
@@ -88,12 +88,12 @@ module.exports = {
         },
         // Saving throw proficiencies. true if proficiency is added
         saving_throws: {
-            str: false,
-            dex: false,
-            con: false,
-            int: false,
-            wis: false,
-            cha: false
+            str: 0,
+            dex: 0,
+            con: 0,
+            int: 0,
+            wis: 0,
+            cha: 0
         },
         // 0 for no proficiency, 1 for proficiency, 2 for mastery. 
         // More for general BSing and overstacking.
@@ -128,7 +128,7 @@ module.exports = {
         data: {},
 
         // Updates the information in the character object
-        // Things updated include: 
+        // Things updated include: race, 
         update: function () {
 
         },
