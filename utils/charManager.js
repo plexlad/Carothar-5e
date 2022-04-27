@@ -15,34 +15,25 @@ for (i in config.filesToLoad.spells) { spells = {...spells, ...require('../' + c
 for (i in config.filesToLoad.traits) { traits = {...traits, ...require('../' + config.filesToLoad.traits[i]) } }
 
 module.exports = {
-    // Returns a newly created character
-    // Using the values and their descriptions, make a character. This is the base line for more to be done in the GUI app.
-    /**
-     * @param {String} name - Character's name
-     * @param {Object} class_params - Array of objects like shown [{classe: Class, amount: Level}]. Supports multiclassing! Use classes from libs/classes.json for better use and traits.
-     * @param {String} race - Character's race. Make sure one is selected from the libs/races.json file.
-     * @param {Object} stats - The character's ability scores. To declare, use {stat: Number}. Ex: {strength: 10, ...}
-     * @param {Object} data - Character's data (for GUI or etc.)
-     * @returns {Object}
-     */
-    
     // Returns the loaded libraries
     classes,
     races,
     spells,
     traits,
 
-    // A function that returns a created character
+    // A function that returns a created character. Simplifies the process, but the base layout for a character can be found below 
     /**
      * @param {String} name - Name of the character
      * @param {Array} class_params - Class and levels of the character. In format [{name: ClassName, level: classLevel}, ...]
      * @param {String} race - Race of the character. If it is in a lib, it will update that information.
-     * @param {Object} ability_scores - The ability scores of the character. Input an object with str, dex, con, int, wis, cha. Ex: {str: Strength, dex: Dexterity, ...}
+     * @param {Object} ability_scores - The ability scores of the character. Input an object with any of str, dex, con, int, wis, cha. Ex: {str: Strength, cha: Charisma, ...}
      * @param {Object} proficiencies - The ability proficiencies of the character. Input an object with acrobatics, animal_handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, religion, sleight_of_hand, stealth, survival. Put a 1 or true for proficiency, 2 for mastery.
      * @param {Object} data - Data that is meant for external use. Great for GUIs.
+     * @param {Function} status_cb - Callback for status code functions. Can be used with the front end for error detection and debugging
      * @returns {Object} A character object that can be interacted with. Check docs for more.
      */
-    createCharacter: function (name, class_params, race, ability_scores={}, proficiencies={}, data={}) {
+    createCharacter: function (name, class_params, race, ability_scores={}, proficiencies={}, data={}, status_cb=() => {}) {
+        
         let char = this.character;
 
         let temp_ability_scores = Object.keys(char.ability_scores);
@@ -56,7 +47,7 @@ module.exports = {
             }
         }
 
-        // Creates a basic list
+        // Creates a basic list of proficiencies
         let temp_proficiencies = Object.keys(char.proficiencies);
 
         // Updates proficiencies
@@ -71,17 +62,22 @@ module.exports = {
         // Sets character name
         char.name = name;
         
-        // Sets character race, also update race details
+        // Sets character race, also update race details, sends a status code in case race name does not exist with callback
         if (Object.keys(races).includes(race)) {
-            char.race = races[race];
+            char.race = this.races[race];
         } else {
             char.race.index = race;
+            utils.sendStatus(211, 'Race name does not exist in character creation.', status_cb());
         }
-        // race details
 
-        // Creates details for class to be used in char.update() step
+        // Creates details for class, sends a status code in case class name does not exist with callback
         for (i in class_params) {
-            char.classes[class_params[i].name] = { level: class_params[i].level }
+            if (Object.keys(classes).includes(class_params[i].name)) {
+                char.classes[class_params[i].name] = { ...char.classes[class_params[i].name], level: class_params[i].level, ...this.classes[class_params[i].name]};
+            } else {
+                char.classes[class_params[i].name] = { level: class_params[i].level, index: class_params[i].name }
+                utils.sendStatus(221, 'Class name does not exist in character creation.', status_cb());
+            }
         }
 
         // Sets character data (for GUI/etc.)
@@ -98,6 +94,9 @@ module.exports = {
      * @returns {Object} - Returns a character object that is loaded from the file
      */
     loadCharacter: function (file_loc) {
+        let char = require(file_loc);
+        char = { ...char, update: this.character.update, levelUp: this.character.levelUp };
+        return char;
     },
 
     /**
@@ -105,7 +104,14 @@ module.exports = {
      * @param {Object} char 
      */
     exportCharacter: function (file_loc, char) {
-        fs.writeFile(file_loc, JSON.stringify(char));
+        fs.writeFile(
+            file_loc, 
+            JSON.stringify(char, null, 4), 
+            e => {
+                if (e) { 
+                    throw e;
+                }
+            });
     },
 
     character: {
@@ -119,7 +125,8 @@ module.exports = {
             // Attributes that can be used from base lib files include: index, name, speed, ability_bonuses, 
             // alignment, age, size, size_description, starting_proficiencies, languages, language_dec, traits
             // subraces, url. Look at the libs/races.json or libs/custom_races.json for examples.
-            // Speed of the character
+ 
+           // Speed of the character
         },
         // Total level used for proficiency bonus and similar
         total_level: 0,
@@ -185,6 +192,10 @@ module.exports = {
 
         },
 
+        feats: {
+
+        },
+
         // data is used for storing values used by GUI elements/tools not used in the app. 
         // Although this may have basic character sheet stuff, it can store anything the GUI needs from the character.
         data: {},
@@ -195,7 +206,7 @@ module.exports = {
         update: function () {
             // Updates total level
             for (i in Object.keys(this.classes)) {
-                this.total_level += this.classes[Object.keys(this.classes)].level;
+                this.total_level += this.classes[Object.keys(this.classes)[i]].level;
             }
         }, 
 
@@ -212,7 +223,7 @@ module.exports = {
             } else {
                 this.classes[classe].level += amount;
             }
-            this.total_level += amount;
+            this.update();
         }
     },
 
