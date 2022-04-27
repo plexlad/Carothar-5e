@@ -9,8 +9,17 @@ To have a functional framework, we want to make sure that the major mechanical e
     - [ ] Item/Inventory Management
     - [ ] Attacking
 - [ ] Custom Character Support
+    - [ ] Custom Races
+    - [ ] Custom Classes
+    - [ ] Custom Classes
 - [ ] Modular JS Script Building (For homebrew mechanics that GUIs can implement)
+    - [ ] Custom Actions
 - [ ] Documentation
+    - [ ] utils
+    - [ ] charManager
+    - [ ] config/Setup
+    - [ ] Carothar object use
+- [ ] Object based instead of file based (Carothar object)
 
 ### Future Goals?
 Carothar was originally meant to be a project that used modules in order to to be used in any RPG system if created correctly. Problem is, scope, skill, and time are things that need to be accounted for, and I do not have enough of those. With more experience and scope this is something that can come, but in the meantime, DnD is pretty fun. Carothar5e (meant for DnD, but can potentially be used for other things) allows me to help build up my development skill and eventually build an experience base that can be used in Carothar with enough traction. This was a lengthy explanation, but below is technical things for dev to use. Thanks for reading!
