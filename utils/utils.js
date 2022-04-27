@@ -61,6 +61,19 @@ module.exports = {
         });
     },
 
+    // Currently on hold for later
+    // Generate the base libraries from the config links, this will update with what the api has vs the default
+    // generateDefaultLibs: function () {
+    //     let links, link_options;
+    //     link_options = ['spells', 'races', 'classes', 'traits'];
+    //     for (i in link_options) {
+    //         links = config.generationLinks[link_options[i]]
+    //         for (x in links) {
+    //             this.generateLibFromAPI(links[x], `./libs/${link_options[i]}.json`);
+    //         }
+    //     }
+    // },
+
     // Sends a status. Can be used for errors, debugging, and for specific cases. Sets an active status variable to this.
     // The status still needs to be detected by the app for use.
     // Status codes:

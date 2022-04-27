@@ -1,0 +1,4 @@
+This is a list of all people that have contributed to the project. Please credit to these people if you are to make your own offshoot/remake of the software.
+
+Head Developers
+    deplexus

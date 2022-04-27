@@ -2,14 +2,25 @@
   "name": "carothar5e",
   "version": "0.0.1",
   "description": "A character manager and tool for DnD 5e.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "keywords": [
+    "DnD",
+    "carothar",
+    "Carothar",
+    "character manager"
+  ],
+  "homepage": "https://github.com/toastielad/Carothar-5e",
+  "bugs": {
+    "url": "https://github.com/toastielad/Carothar-5e/issues"
   },
+  "main": "index.js",
   "author": "deplexus",
-  "license": "ISC",
+  "license": "CC-BY-SA-4.0",
+  "contributors": [],
   "dependencies": {
     "axios": "^0.26.1",
     "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "generator-license-cc": "^1.1.0"
   }
 }

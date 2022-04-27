@@ -9,7 +9,7 @@ const config = require('./config.json');
 
 // Put your code in main, this is where the stuff happens!
 function main() {
-    
+    utils.generateDefaultLibs();
 }
 
 main();
