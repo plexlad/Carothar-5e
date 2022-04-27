@@ -2,3 +2,6 @@ This is a list of all people that have contributed to the project. Please credit
 
 Head Developers
     deplexus
+
+Non-formatted list
+deplexus
