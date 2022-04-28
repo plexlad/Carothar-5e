@@ -29,6 +29,7 @@ class CharManager {
         for (i in config.filesToLoad.spells) { 
             this.classes = {...this.classes, ...require('..' + config.filesToLoad.classes[i]) } 
         }
+
         for (i in config.filesToLoad.traits) { 
             this.classes = {...this.classes, ...require('..' + config.filesToLoad.classes[i]) } 
         }

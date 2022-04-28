@@ -9,12 +9,12 @@ Offical current app version: 0.2.0 Alpha 1
 - [IMPORTANT LINKS](#important-links)
 - [Installation](#installation)
 - [Goals](#goals)
-    - [Future Goals](#future-goals)
+- [Future Goals](#future-goals)
 - [Issues/Asking for features](#issuesasking-for-features)
-    - [Pull Requests](#pull-requests)
+- [Pull Requests](#pull-requests)
 - [Crediting](#crediting)
 - [Developer Quick Reference](#developer-quick-reference)
-    - [Status Codes](#status-codes)
+- [Status Codes](#status-codes)
 - [License](#license)
 
 ## IMPORTANT LINKS
@@ -30,6 +30,8 @@ Not available yet. You can still use the code given, just not in a convenient wa
 ## Goals
 To have a functional framework, we want to make sure that the major mechanical elements are implemented. The system should also be modular, to allow for custom content to flourish. Next, we need a way to actually interact with the framework. This can be done through interactive UIs that can highlight certain features and can be maintained by a community for the most positive feedback. I will be developing a CLI and GUI for this purpose.
 
+For a comprehensive list of what is being updated, please check the [Features Page](https://github.com/users/toastielad/projects/2).
+
 - [ ] Major D&D Mechanics
     - [ ] Character creation
     - [ ] Item/Inventory Management
@@ -39,9 +41,8 @@ To have a functional framework, we want to make sure that the major mechanical e
     - [x] Custom Classes
     - [ ] Custom Items
     - [ ] Custom Abilities
+    - [ ] Magic System
     - [ ] Documentation for creating homebrew
-- [ ] Modular JS Script Building (For homebrew mechanics that GUIs can implement)
-    - [ ] Custom Actions
 - [ ] Documentation
     - [ ] utils
     - [ ] charManager
