@@ -34,9 +34,11 @@ To have a functional framework, we want to make sure that the major mechanical e
     - [ ] Item/Inventory Management
     - [ ] Attacking
 - [ ] Custom Character Support
-    - [ ] Custom Races
-    - [ ] Custom Classes
-    - [ ] Custom Classes
+    - [x] Custom Races
+    - [x] Custom Classes
+    - [ ] Custom Items
+    - [ ] Custom Abilities
+    - [ ] Documentation for creating homebrew
 - [ ] Modular JS Script Building (For homebrew mechanics that GUIs can implement)
     - [ ] Custom Actions
 - [ ] Documentation
