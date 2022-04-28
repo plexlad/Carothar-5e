@@ -1,5 +1,9 @@
 # Carothar5e - Programming framework for D&D 5e
-A D&amp;D character management framework meant to be used with applications, GUI's or even just simple CLI. Still in early phases of development. Check the README for release goals and potential future plans!
+A D&amp;D character management framework meant to be used with applications, GUI's or even just simple CLI. Still in early phases of development. Check the README for release goals and potential future plans! 
+
+Prism and Prism Terminal - D&D 5e Assistant is in development! Stay tuned for more.
+
+Offical current app version: 0.2.0 Alpha 1
 
 ## Table of Contents
 - [IMPORTANT LINKS](#important-links)
@@ -21,10 +25,7 @@ For programmers, check [Installation](#installation) below.
 Check the wiki for [getting started](https://github.com/toastielad/Carothar-5e/wiki), both for programmers and software.
 
 ## Installation
-NO INSTALLATION OPTIONS AVAILABLE YET
-Dev install: Make sure that npm and node.js are installed and then use this command in terminal - `npm install carothar5e axios`
-
-CLI and GUI are still in development, but stay updated. The development for those will be located in seperate branches.
+Not available yet. You can still use the code given, just not in a convenient way. Once documentation is up, it will be easier. Check later for updates.
 
 ## Goals
 To have a functional framework, we want to make sure that the major mechanical elements are implemented. The system should also be modular, to allow for custom content to flourish. Next, we need a way to actually interact with the framework. This can be done through interactive UIs that can highlight certain features and can be maintained by a community for the most positive feedback. I will be developing a CLI and GUI for this purpose.
