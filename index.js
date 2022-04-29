@@ -3,7 +3,7 @@
 const axios = require('axios');
 const fs = require('fs');
 
-const Utils = new require('./utils/utils');
+const Utils = require('./utils/utils');
 const CharManager = require('./utils/charManager');
 
 const config = require('./config.json');
@@ -12,6 +12,7 @@ class Carothar {
     constructor(config) {
         this.utils = new Utils(config);
         this.charManager = new CharManager(config);
+        this.config = config;
     }
 }
 
