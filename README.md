@@ -25,7 +25,7 @@ For programmers, check [Installation](#installation) below.
 For documentation and quick reference for developers, check it out on the [wiki page](https://github.com/toastielad/Carothar-5e/wiki).
 
 ## Installation
-Not available yet. You can still use the code given, just not in a convenient way. Once documentation is up, it will be easier. Check later for updates.
+Not available yet. You can still use the code given, just make sure that instead of trying to install an npm package (which doesn't exist), clone the repository and `require('./index.js')` instead of the package! From there, check out the getting starting page in the wiki/docs. npm support is coming soon.
 
 ## Goals
 To have a functional framework, we want to make sure that the major mechanical elements are implemented. The system should also be modular, to allow for custom content to flourish. Next, we need a way to actually interact with the framework. This can be done through interactive UIs that can highlight certain features and can be maintained by a community for the most positive feedback. I will be developing a CLI and GUI for this purpose.
