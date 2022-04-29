@@ -1,4 +1,4 @@
-# Carothar5e - Programming framework for D&D 5e
+# Carothar5e - JS Programming framework for D&D 5e
 A D&amp;D character management framework meant to be used with applications, GUI's or even just simple CLI. Still in early phases of development. Check the README for release goals and potential future plans! 
 
 Prism and Prism Terminal - D&D 5e Assistant is in development! Stay tuned for more.
@@ -18,11 +18,11 @@ Offical current app version: 0.2.0 Alpha 1
 - [License](#license)
 
 ## IMPORTANT LINKS
-The GUI and CLI are not ready yet, but they will be available under the [releases tab](https://github.com/toastielad/Carothar-5e/releases) once they are ready.
+Prism and Prism Terminal - The GUI and CLI that uses Carothar-5e is coming! Check here for updates!
 
 For programmers, check [Installation](#installation) below.
 
-Check the wiki for [getting started](https://github.com/toastielad/Carothar-5e/wiki), both for programmers and software.
+For documentation and quick reference for developers, check it out on the [wiki page](https://github.com/toastielad/Carothar-5e/wiki).
 
 ## Installation
 Not available yet. You can still use the code given, just not in a convenient way. Once documentation is up, it will be easier. Check later for updates.
@@ -33,7 +33,7 @@ To have a functional framework, we want to make sure that the major mechanical e
 For a comprehensive list of what is being updated, please check the [Features Page](https://github.com/users/toastielad/projects/2).
 
 - [ ] Major D&D Mechanics
-    - [ ] Character creation
+    - [x] Character creation
     - [ ] Item/Inventory Management
     - [ ] Attacking
 - [ ] Custom Character Support
@@ -51,6 +51,8 @@ For a comprehensive list of what is being updated, please check the [Features Pa
 - [x] Object based instead of file based (Carothar object)
 
 ### Future Goals?
+With this project? If it gains enough traction and people want to develop and use it, I would love to have multi-language support! Being able to make apps in Python and C++ would be fantastic. Although I could do Python, I would definitely need community help with C++. if you want to see this done, share it with people you know!
+
 Carothar was originally meant to be a project that used modules in order to to be used in any RPG system if created correctly. Problem is, scope, skill, and time are things that need to be accounted for, and I do not have enough of those. With more experience and scope this is something that can come, but in the meantime, DnD is pretty fun. Carothar5e (meant for DnD, but can potentially be used for other things) allows me to help build up my development skill and eventually build an experience base that can be used in Carothar with enough traction. This was a lengthy explanation, but below is technical things for dev to use. Thanks for reading!
 
 ## Issues/Asking for features

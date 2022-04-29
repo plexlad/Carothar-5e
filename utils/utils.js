@@ -2,15 +2,14 @@
 
 const axios = require('axios');  // Used for get/post requests. Check requestGet
 const fs = require('fs');  // Used for writing to files
-const { threadId } = require('worker_threads');
 
 class Utils {
     constructor(config) {
         // Gives the current app version. Used for updating things such as characters.
         this.appVersion = require('../package.json').version;
 
-        this.status = 0;
-        this.reason = '';
+        this.status = undefined;
+        this.reason = undefined;
 
         // Returns the response for a get response
         /**
@@ -103,43 +102,46 @@ class Utils {
          * @returns {String} Returns the description of the error code as a string
          */
         this.returnStatusInfo = function (num) {
-            let num_index =  String(num).split('');
-            // Comments here are code indexes for reference
-            // 1
-            if (num_index[0] === '1') {
-                if (num_index[1] === undefined) {
-                    return 'Relates to system functions that need to be fixed through the programming.';
-                // 11
-                } else if (num_index[1] === '1') {
-                    return 'System error';
-                }
-            // 2
-            } else if (num_index[0] === '2') {
-                if (num_index[1] === undefined) {
-                    return 'Relates to character creation and updating';
-                // 21
-                } else if (num_index[1] === '1') {
-                    if (num_index[2] === undefined) {
-                        return 'Having to do with race loading';
-                    // 211
-                    } else if (num_index[2] === '1') {
-                        return 'Race is not in lib, and could only load an index. Check lib/custom_races or lib/races. This can also relate to a misspelling of the name.';
+            if (num) {
+                let num_index =  String(num).split('');
+                // Comments here are code indexes for reference
+                // 1
+                if (num_index[0] === '1') {
+                    if (num_index[1] === undefined) {
+                        return 'Relates to system functions that need to be fixed through the programming.';
+                    // 11
+                    } else if (num_index[1] === '1') {
+                        return 'System error';
                     }
-                // 22
-                } else if (num_index[1] === '2') {
-                    if (num_index[2] === undefined) {
-                        return 'Having to do with class loading';
-                    // 221
-                    } else if (num_index[2] === '1') {
-                        return 'Class is not in lib, and could only load an index. Check lib/custom_classes or lib/custom_classes. This could also relate to a misspelling of a name.';
+                // 2
+                } else if (num_index[0] === '2') {
+                    if (num_index[1] === undefined) {
+                        return 'Relates to character creation and updating';
+                    // 21
+                    } else if (num_index[1] === '1') {
+                        if (num_index[2] === undefined) {
+                            return 'Having to do with race loading';
+                        // 211
+                        } else if (num_index[2] === '1') {
+                            return 'Race is not in lib, and could only load an index. Check lib/custom_races or lib/races. This can also relate to a misspelling of the name.';
+                        }
+                    // 22
+                    } else if (num_index[1] === '2') {
+                        if (num_index[2] === undefined) {
+                            return 'Having to do with class loading';
+                        // 221
+                        } else if (num_index[2] === '1') {
+                            return 'Class is not in lib, and could only load an index. Check lib/custom_classes or lib/custom_classes. This could also relate to a misspelling of a name.';
+                        }
                     }
+                } else {
+                    throw `Status code ` + num + `does not exist!`;
                 }
             } else {
-                throw `Status code ` + num + `does not exist!`;
+                console.log('Status not set.')
             }
         };
     }
 }
-
 
 module.exports = Utils;

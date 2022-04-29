@@ -5,10 +5,12 @@ const axios = require('axios');
 
 const { resolve } = require('path');
 
-const utils = require('./utils');
-
 class CharManager {
     constructor(config) {
+        // Sets utils temporarily for class setup
+        let temp = require('./utils');
+        const utils = new temp(config);
+
         let i;  // Temp variable for for statements
 
         // Sets default values for libs
@@ -19,19 +21,19 @@ class CharManager {
 
         // Generates libs from config file
         for (i in config.filesToLoad.classes) {
-            this.classes = {...this.classes, ...require('..' + config.filesToLoad.classes[i]) } 
+            this.classes = {...this.classes, ...require(config.filesToLoad.classes[i]) } 
         }
 
         for (i in config.filesToLoad.races) {
-            this.classes = {...this.classes, ...require('..' + config.filesToLoad.classes[i]) }
+            this.races = {...this.races, ...require( config.filesToLoad.races[i]) }
         }
 
         for (i in config.filesToLoad.spells) { 
-            this.classes = {...this.classes, ...require('..' + config.filesToLoad.classes[i]) } 
+            this.spells = {...this.spells, ...require( config.filesToLoad.spells[i]) } 
         }
 
         for (i in config.filesToLoad.traits) { 
-            this.classes = {...this.classes, ...require('..' + config.filesToLoad.classes[i]) } 
+            this.traits = {...this.traits, ...require( config.filesToLoad.traits[i]) } 
         }
 
         // A function that returns a created character. Simplifies the process, but the base layout for a character can be found below 
@@ -76,7 +78,7 @@ class CharManager {
             char.name = name;
             
             // Sets character race, also update race details, sends a status code in case race name does not exist with callback
-            if (Object.keys(races).includes(race)) {
+            if (Object.keys(this.races).includes(race)) {
                 char.race = this.races[race];
             } else {
                 char.race.index = race;
@@ -85,11 +87,11 @@ class CharManager {
 
             // Creates details for class, sends a status code in case class name does not exist with callback
             for (i in class_params) {
-                if (Object.keys(classes).includes(class_params[i].name)) {
+                if (Object.keys(this.classes).includes(class_params[i].name)) {
                     char.classes[class_params[i].name] = { ...char.classes[class_params[i].name], level: class_params[i].level, ...this.classes[class_params[i].name]};
                 } else {
                     char.classes[class_params[i].name] = { level: class_params[i].level, index: class_params[i].name }
-                    utils.sendStatus(221, 'Class name does not exist in character creation.', status_cb());
+                    
                 }
             }
 
