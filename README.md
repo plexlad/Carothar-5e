@@ -24,6 +24,8 @@ For programmers, check [Installation](#installation) below.
 
 For documentation and quick reference for developers, check it out on the [wiki page](https://github.com/toastielad/Carothar-5e/wiki).
 
+For up and coming features, check the [Carothar-5e Project Board](https://github.com/users/toastielad/projects/2)
+
 ## Installation
 Not available yet. You can still use the code given, just make sure that instead of trying to install an npm package (which doesn't exist), clone the repository and `require('./index.js')` instead of the package! From there, check out the getting starting page in the wiki/docs. npm support is coming soon.
 
@@ -79,7 +81,7 @@ if the answer was yes to all of those, ask for the new feature, just make sure y
 If you are a programmer that would be interested in this project, please check out the [Projects Tab](https://github.com/toastielad/Carothar-5e/projects?type=beta) and try to make a pull request! (details below)
 
 ### Pull Requests
-Pull requests also follow a template. Try to work on features from the [Projects Tab](https://github.com/toastielad/Carothar-5e/projects?type=beta), optimizations, or bugs from the [Issues Page](https://github.com/toastielad/Carothar-5e/issues). Thanks for looking at contributing!
+Pull requests also follow a template. Try to work on features from the [Projects Tab](https://github.com/users/toastielad/projects/2), optimizations, or bugs from the [Issues Page](https://github.com/toastielad/Carothar-5e/issues). Thanks for looking at contributing!
 
 ## Crediting
 This software is under the Creative Commons Attribution-ShareAlike 4.0 License. This means that you need to credit the licensor and also use the same license if you are to also distribute the software. Although it is not required, if you do make another version of this software, please credit those listed in credits.txt for a full comprehensive list of those that contributed.
