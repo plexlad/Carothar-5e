@@ -1,7 +1,7 @@
 # Carothar5e - JS Programming framework for D&D 5e
 A D&amp;D character management framework meant to be used with applications, GUI's or even just simple CLI. Still in early phases of development. Check the README for release goals and potential future plans! 
 
-Prism and Prism Terminal - D&D 5e Assistant is in development! Stay tuned for more.
+Dicely and Dicely Terminal - D&D 5e Assistant is in development! Stay tuned for more.
 
 Offical current app version: 0.2.0 Alpha 1
 
@@ -18,7 +18,7 @@ Offical current app version: 0.2.0 Alpha 1
 - [License](#license)
 
 ## IMPORTANT LINKS
-Prism and Prism Terminal - The GUI and CLI that uses Carothar-5e is coming! Check here for updates!
+Dicely and Dicely Terminal - The GUI and CLI that uses Carothar-5e is coming! Check here for updates!
 
 For programmers, check [Installation](#installation) below.
 

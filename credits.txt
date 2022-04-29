@@ -3,5 +3,8 @@ This is a list of all people that have contributed to the project. Please credit
 Head Developers
     deplexus
 
+Node.js Packages
+    axios
+
 Non-formatted list
 deplexus
