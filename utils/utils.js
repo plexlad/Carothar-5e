@@ -1,6 +1,7 @@
 // Commonly used functions across sections
 
 const axios = require('axios');  // Used for get/post requests. Check requestGet
+const { lookup } = require('dns');
 const fs = require('fs');  // Used for writing to files
 
 class Utils {
@@ -16,61 +17,48 @@ class Utils {
          * @param {String} url - URL of the API
          * @returns {Object} Returns the data from an api
          */
-        this.requestGet = async function (url) {
-            let res = await axios
+        this.requestGet = async function (url, cb=(res) => { console.log(res); }) {
+            await axios
                 .get(url)
                 .catch(e => {
                     console.error(e);
+                })
+                .then(res => {
+                    cb(res);
                 });
-            return res;
         };
 
-        // Generates a spell certain libray from a RESTful API. If you want to make one, look at the lib files
+        // Generates and returns a library from RESTful API
         /**
          * @param {String} url - The http url of the API
-         * @param {String} file_loc - The file_location you want to write to
+         * @param {function} cb - Callback with argument of the api object
          * @param {Boolean} read_to_console - If you want to output readings to console. Disabled by default
          */
-        this.generateLibFromAPI = async function (url, file_loc, read_to_console=false) {
-            let sample = await this.requestGet(url);
-            if (sample === undefined) {
-                console.log('Link is undefined!');
-            }
-            let object = {};
+        this.generateLibFromAPI = async function (url, cb=(lib) => {}, read_to_console=false) {
+            this.requestGet(url, async (res) => {
+                let sample = res.data
+                if (sample === undefined) {
+                    console.error('Link is undefined!');
+                }
+                let object = {};
 
-            // Generate index (Library of indexes in chosen url_end)
-            let index = [];
-            for (let i = 0; i <= sample.count - 1; i++) {
-                index.push(sample.results[i].index);
-            }
-
-            for (let i in index) {
-                object[index[i]] = await this.requestGet(url + index[i]);
-                if (read_to_console) console.log(i + ' / ' + sample.count);
-            }
-
-            let data = JSON.stringify(object, null, 4);
-            fs.writeFile(file_loc, data, e => {
-                if (e) {
-                    throw e;
+                // Generate index (Library of indexes in chosen url_end)
+                let index = [];
+                for (let i = 0; i <= sample.count - 1; i++) {
+                    index.push(sample.results[i].index);
                 }
 
-                if (read_to_console) console.log('Completed! Data written.');
+                // Generates the full library, and prints the progress if print_to_console is true
+                for (let i in index) {
+                    await this.requestGet(url + index[i], (res) => {
+                        if (read_to_console) console.log(i + ' / ' + sample.count);
+                        object[index[i]] = res.data;
+                    });
+                }
+
+                cb(object);
             });
         };
-
-        // Currently on hold for later
-        // enerate the base libraries from the config links, this will update with what the api has vs the default
-        this.generateDefaultLibs = function () {
-            let links, link_options;
-            link_options = Object.keys(config.filesToLoad);
-            for (i in link_options) {
-                links = config.generationLinks[link_options[i]]
-                for (let x in links) {
-                    this.generateLibFromAPI(links[x], `./libs/${link_options[i]}.json`);
-               }
-            }
-         },
 
         // Sends a status. Can be used for errors, debugging, and for specific cases. Sets an active status variable to this.
         // The status still needs to be detected by the app for use.
@@ -87,12 +75,13 @@ class Utils {
          * @param {String} reason - The reason why the status was sent.
          * @param {Function} cb - A callback function that can be used for detection, errors, etc.
          */
-        this.sendStatus = function (num, reason='', cb=undefined) {
+        this.sendStatus = function (num, reason='', cb=undefined, read_to_console=false) {
             this.status = num;
             this.reason = reason;
             if (cb !== undefined && typeof cb == Function) {
-                cb();
+                cb(this.reason, this.status);
             }
+            if (read_to_console) console.log(this.status, ':', this.reason);
         };
 
         // Returns a string with the description of the status described above
