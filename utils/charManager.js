@@ -47,7 +47,7 @@ class CharManager {
          * @param {Function} status_cb - Callback for status code functions. Can be used with the front end for error detection and debugging
          * @returns {Object} A character object that can be interacted with. Check docs for more.
          */
-        this.createCharacter = function (name, class_params, race, ability_scores={}, proficiencies={}, data={}, status_cb=() => {}) {
+        this.createCharacter = function (name, class_params, race, ability_scores={}, proficiencies={}, data={}, status_cb=(status, reason) => {}, read_to_console=false) {
             
             let char = this.character;
 
@@ -82,7 +82,7 @@ class CharManager {
                 char.race = this.races[race];
             } else {
                 char.race.index = race;
-                utils.sendStatus(211, 'Race name does not exist in character creation.', status_cb());
+                utils.sendStatus(211, 'Race name does not exist in character creation.', status_cb(status, reason), read_to_console);
             }
 
             // Creates details for class, sends a status code in case class name does not exist with callback

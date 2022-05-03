@@ -7,9 +7,9 @@
         "traits": ["https://www.dnd5eapi.co/api/traits/"]
     }, 
     "filesToLoad": {
-        "classes": ["../libs/classes.json", "../libs/custom_classes.json"],
-        "races": ["../libs/races.json", "../libs/custom_races.json"],
-        "spells": ["../libs/spells.json", "../libs/custom_spells.json"],
-        "traits": ["../libs/traits.json", "../libs/custom_traits.json"]
+        "classes": ["./libs/classes.json", "./libs/custom_classes.json"],
+        "races": ["./libs/races.json", "./libs/custom_races.json"],
+        "spells": ["./libs/spells.json", "./libs/custom_spells.json"],
+        "traits": ["./libs/traits.json", "./libs/custom_traits.json"]
     }
 }

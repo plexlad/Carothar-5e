@@ -15,12 +15,8 @@
   "main": "index.js",
   "author": "deplexus",
   "license": "CC-BY-SA-4.0",
-  "contributors": [],
+  "contributors": ["deplexus"],
   "dependencies": {
-    "axios": "^0.26.1",
-    "fs": "^0.0.1-security"
-  },
-  "devDependencies": {
-    "generator-license-cc": "^1.1.0"
+    "axios": "^0.26.1"
   }
 }
